@@ -18,7 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Responsible for downloading a single phylogenetic tree (as a phyloxml file) for 
+ * display in the webpage. Supports two parameters:
+ * 1) clade: the 1KP taxonomic clade with spaces converted to underscore
+ * 2) file: if the Content-disposition should be sent with the response, set this to 1
+ * 
  * @author acassin
  */
 public class TreeDownload extends HttpServlet {
