@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IC Protein family downloads</title>
+
+       
+    <!-- needed to ensure carousel are correctly sized -->
+    <link href="css/mine.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog.css" rel="stylesheet">
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- sidebar -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Important Owl stylesheet -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+ 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Include js plugin -->
+    <script src="js/owl.carousel.min.js"></script>
+    
+  </head>
+
+  <body>
+     
+      <script>
+     
+           function getDownloads(category) {
+              $.ajax({
+                    url: "services/AvailableDownloads",
+                    data: {
+                        category: category
+                    },
+                    success: function( data ) {
+                       $("#result").html( data );
+                    }
+              });
+          }
+      </script>
+      
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="index.html">Home</a>
+          <a class="blog-nav-item" href="icprot.html">About</a>
+          <a class="blog-nav-item" href="methods.html">Bioinformatics</a>
+          <a class="blog-nav-item" href="phylogeny.html">Phylogeny</a>
+          <a class="blog-nav-item active" href="download.html">Download</a>
+          <a class="blog-nav-item" href="about_us.html">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+      <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ol class="sidebar-nav">
+                <li class="sidebar-brand">
+                   Gene Family results
+                </li>
+                <li>
+                    <a onclick="getDownloads('putative_ic_proteins');">Putative IC proteins</a>
+                </li>
+              
+            </ol>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+               
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div id="image-result">
+                        </div>
+                        <div id="result">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+  </body>
+</html>
