@@ -8,12 +8,10 @@ package au.edu.unimelb.plantcell.onekp.icprot.servlets;
 import au.edu.unimelb.plantcell.onekp.interfaces.FileVisitor;
 import au.edu.unimelb.plantcell.onekp.interfaces.StreamResourceLoaderCallback;
 import java.io.File;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,22 +72,17 @@ public class SubfolderTableVisitor implements FileVisitor {
         
         List<File> sorted_dirs = new ArrayList<>();
         sorted_dirs.addAll(dir2files.keySet());
-        Collections.sort(sorted_dirs, new Comparator<File>() {
-
-            @Override
-            public int compare(final File o1, final File o2) {
-                // length of absolute path is used for comparison for now...
-                int len1 = o1.getAbsolutePath().length();
-                int len2 = o2.getAbsolutePath().length();
-                if (len1 < len2) {
-                    return -1;
-                } else if (len1 > len2) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+        Collections.sort(sorted_dirs, (final File o1, final File o2) -> {
+            // length of absolute path is used for comparison for now...
+            int len1 = o1.getAbsolutePath().length();
+            int len2 = o2.getAbsolutePath().length();
+            if (len1 < len2) {
+                return -1;
+            } else if (len1 > len2) {
+                return 1;
+            } else {
+                return 0;
             }
-            
         });
         FolderDescription fd = new FolderDescription(cb);
         for (File folder : sorted_dirs) {
@@ -221,7 +214,7 @@ public class SubfolderTableVisitor implements FileVisitor {
         assert(f != null);
         File dir = f.getParentFile();
         if (!dir2files.containsKey(dir)) {
-            dir2files.put(dir, new ArrayList<File>());
+            dir2files.put(dir, new ArrayList<>());
         }
         List<File> l = dir2files.get(dir);
         assert(l != null);
@@ -229,13 +222,13 @@ public class SubfolderTableVisitor implements FileVisitor {
     }
 
     private void separateImagesFromOtherFiles(List<File> files, ArrayList<File> image_files, ArrayList<File> other_files) {
-        for (File f : files) {
+        files.stream().forEach((f) -> {
             if (f.getName().toLowerCase().endsWith(".png")) {
                 image_files.add(f);
             } else {
                 other_files.add(f);
             }
-        }
+        });
         Collections.sort(image_files);
         Collections.sort(other_files);
     }

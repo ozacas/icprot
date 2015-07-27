@@ -110,6 +110,7 @@
           }
           
           function doTree(clade) {
+             removeExistingContent(clade);
              $(document).ready(function(){
                   $.ajax({
                     url: "services/TreeDownload",
